@@ -18,6 +18,8 @@ using Microsoft.EntityFrameworkCore;
 //using GraphQL.Server.Ui.Voyager;
 using HotChocolate.AspNetCore.Voyager;
 using GraphQLPractice.GraphQL;
+using GraphQLPractice.GraphQL.Types.Platforms;
+using GraphQLPractice.GraphQL.Types.Commands;
 using GraphQLPractice.GraphQL.Types;
 
 namespace GraphQLPractice
@@ -37,11 +39,19 @@ namespace GraphQLPractice
             services.AddControllers();
             services.AddGraphQLServer()
                 .AddQueryType<Query>()
+                .AddMutationType<Mutation>()
+                .AddSubscriptionType<Subscription>()
                 .AddProjections()
-               //.AddType<PlatformType>()
+                //.AddType<PlatformType>()
+                .AddType<AddPlatformPaylodType>()
+                .AddType<AddPlatformInputType>()
                 //.AddType<CommandType>()
+                .AddType<AddCommandPayloadType>()
+                .AddType<AddCommandInputType>()
                 .AddFiltering()
-                .AddSorting();
+                .AddSorting()
+                .AddInMemorySubscriptions();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GraphQLPractice", Version = "v1" });
@@ -55,7 +65,7 @@ namespace GraphQLPractice
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GraphQLPractice v1"));
             }
-
+            app.UseWebSockets();
             app.UseRouting();
 
             app.UseAuthorization();

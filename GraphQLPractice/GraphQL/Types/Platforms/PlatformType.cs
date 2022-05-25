@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GraphQLPractice.GraphQL.Types
+namespace GraphQLPractice.GraphQL.Types.Platforms
 {
     public class PlatformType :ObjectType<Platform>
     {
