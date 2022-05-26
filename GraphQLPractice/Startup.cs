@@ -26,6 +26,7 @@ namespace GraphQLPractice
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,18 +35,19 @@ namespace GraphQLPractice
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+           
             services.AddPooledDbContextFactory<GraphQlDbContext>(options => options.UseSqlServer
             (Configuration.GetConnectionString("DevConnection")));
             services.AddControllers();
             services.AddGraphQLServer()
-                .AddQueryType<Query>()
+            .AddQueryType<Query>()
                 .AddMutationType<Mutation>()
                 .AddSubscriptionType<Subscription>()
                 .AddProjections()
-                //.AddType<PlatformType>()
+                .AddType<PlatformType>()
                 .AddType<AddPlatformPaylodType>()
                 .AddType<AddPlatformInputType>()
-                //.AddType<CommandType>()
+                .AddType<CommandType>()
                 .AddType<AddCommandPayloadType>()
                 .AddType<AddCommandInputType>()
                 .AddFiltering()

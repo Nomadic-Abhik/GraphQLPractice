@@ -5,11 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraphQLPractice.GraphQL.Types.Commands;
+using GraphQLPractice.GraphQL.Types.Platforms;
 
 namespace GraphQLPractice.GraphQL
 {
     public class Query
-    { 
+    {
+
         [UseDbContext(typeof(GraphQlDbContext))]
         [UseProjection]
         [UseFiltering]
